@@ -116,6 +116,7 @@ grocery-knapsack-project/
 ├── streamlit_app.py
 ├── requirements.txt
 ├── README.md
+├── presentation.pdf
 └── proposal.pdf
 ```
 
