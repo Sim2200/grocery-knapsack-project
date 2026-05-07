@@ -1,21 +1,117 @@
-
 import streamlit as st
 import pandas as pd
+import numpy as np
 
 st.title("Grocery Shopping Optimization")
+st.write("This app uses 0/1 Knapsack Dynamic Programming to select grocery items within a budget.")
 
-st.write("This app uses Dynamic Programming to select grocery items within a budget.")
+uploaded_file = st.file_uploader("Upload Open Food Facts TSV file", type=["tsv"])
 
-budget = st.number_input("Enter your grocery budget", min_value=1, value=30)
+budget = st.number_input("Enter grocery budget", min_value=1, value=30)
 
-st.write("Budget selected:", budget)
+def clean_data(df):
+    needed_cols = [
+        "product_name",
+        "brands",
+        "energy_100g",
+        "proteins_100g",
+        "carbohydrates_100g",
+        "fat_100g",
+        "fiber_100g",
+        "sugars_100g",
+        "salt_100g",
+    ]
 
-st.write("Run the Python script locally to generate selected_items.csv, then upload results here.")
+    df = df[needed_cols].copy()
 
-uploaded_file = st.file_uploader("Upload selected_items.csv", type=["csv"])
+    df = df.dropna(subset=[
+        "product_name",
+        "proteins_100g",
+        "fiber_100g",
+        "sugars_100g",
+        "salt_100g"
+    ])
 
-if uploaded_file:
-    df = pd.read_csv(uploaded_file)
-    st.dataframe(df)
-    st.write("Total Cost:", df["price"].sum())
-    st.write("Total Nutrition Score:", df["nutrition_score"].sum())
+    numeric_cols = [
+        "energy_100g",
+        "proteins_100g",
+        "carbohydrates_100g",
+        "fat_100g",
+        "fiber_100g",
+        "sugars_100g",
+        "salt_100g"
+    ]
+
+    for col in numeric_cols:
+        df[col] = pd.to_numeric(df[col], errors="coerce")
+
+    df = df.dropna()
+    df = df.head(200)
+
+    return df
+
+
+def create_price_and_score(df):
+    np.random.seed(42)
+
+    df["price"] = np.random.randint(2, 13, size=len(df))
+
+    df["nutrition_score"] = (
+        df["proteins_100g"] * 2
+        + df["fiber_100g"] * 2
+        - df["sugars_100g"] * 0.5
+        - df["salt_100g"] * 2
+    )
+
+    min_score = df["nutrition_score"].min()
+
+    if min_score < 0:
+        df["nutrition_score"] += abs(min_score) + 1
+
+    df["nutrition_score"] = df["nutrition_score"].round().astype(int)
+
+    return df
+
+
+def knapsack(items, budget):
+    # 
+    pass
+
+
+if uploaded_file is not None:
+    df = pd.read_csv(uploaded_file, sep="\t", low_memory=False)
+
+    df = clean_data(df)
+    df = create_price_and_score(df)
+
+    if st.button("Optimize Grocery Basket"):
+        selected_indexes, best_score = knapsack(df, int(budget))
+        selected_items = df.iloc[selected_indexes]
+
+        st.subheader("Selected Grocery Items")
+        st.dataframe(selected_items[[
+            "product_name",
+            "brands",
+            "price",
+            "proteins_100g",
+            "fiber_100g",
+            "sugars_100g",
+            "salt_100g",
+            "nutrition_score"
+        ]])
+
+        st.subheader("Summary")
+        st.write("Budget:", budget)
+        st.write("Total Cost:", selected_items["price"].sum())
+        st.write("Remaining Budget:", budget - selected_items["price"].sum())
+        st.write("Total Nutrition Score:", best_score)
+        st.write("Number of Items Selected:", len(selected_items))
+
+        csv = selected_items.to_csv(index=False)
+
+        st.download_button(
+            "Download selected_items.csv",
+            csv,
+            "selected_items.csv",
+            "text/csv"
+        )
