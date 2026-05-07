@@ -1,5 +1,13 @@
 # Grocery Shopping Optimization Using Dynamic Programming
 
+# AI Usage Statement
+
+AI tools were used only for UI guidance, debugging assistance, deployment support, and general project guidance.
+
+The project idea, dynamic programming approach, algorithm implementation, core logic, comments, and documentation were manually developed and authored by the project team in accordance with assignment requirements.
+
+---
+
 ## Project Overview
 
 This project applies the **0/1 Knapsack Dynamic Programming algorithm** to solve a real-world grocery shopping optimization problem. The goal is to help users select the best combination of grocery items while staying within a fixed budget and maximizing nutritional value.
@@ -109,8 +117,9 @@ grocery-knapsack-project/
 ├── requirements.txt
 ├── README.md
 └── proposal.pdf
+```
 
-## 2. Run Main Python Program
+# Run Main Python Program
 
 ```bash
 py src/main.py
@@ -126,7 +135,7 @@ The program:
 
 ---
 
-## 3. Run Streamlit App
+# Run Streamlit App
 
 ```bash
 streamlit run streamlit_app.py
@@ -170,13 +179,6 @@ The project demonstrates how Dynamic Programming can solve practical real-world 
 
 ---
 
-# AI Usage Statement
-
-AI tools were used only for UI guidance, debugging assistance, deployment support, and general project guidance.
-
-The project idea, dynamic programming approach, algorithm implementation, core logic, comments, and documentation were manually developed and authored by the project team in accordance with assignment requirements.
-
----
 
 # Team Members
 
