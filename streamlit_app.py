@@ -74,8 +74,41 @@ def create_price_and_score(df):
 
 
 def knapsack(items, budget):
-    # 
-    pass
+
+    n = len(items)
+
+    prices = items["price"].tolist()
+    values = items["nutrition_score"].tolist()
+
+    dp = [[0 for b in range(budget + 1)] for i in range(n + 1)]
+
+    for i in range(1, n + 1):
+        item_price = prices[i - 1]
+        item_value = values[i - 1]
+
+        for b in range(budget + 1):
+
+            if item_price <= b:
+                take_item = item_value + dp[i - 1][b - item_price]
+                skip_item = dp[i - 1][b]
+
+                dp[i][b] = max(take_item, skip_item)
+
+            else:
+                dp[i][b] = dp[i - 1][b]
+
+    selected_indexes = []
+    b = budget
+
+    for i in range(n, 0, -1):
+        if dp[i][b] != dp[i - 1][b]:
+            selected_indexes.append(i - 1)
+            b = b - prices[i - 1]
+
+    selected_indexes.reverse()
+
+    return selected_indexes, dp[n][budget]
+
 
 
 if uploaded_file is not None:
