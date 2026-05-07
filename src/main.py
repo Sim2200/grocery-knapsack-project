@@ -5,12 +5,12 @@ import matplotlib.pyplot as plt
 
 DATA_PATH = "data/en.openfoodfacts.org.products.tsv"
 
-
+# load dataset
 def load_data(path):
     df = pd.read_csv(path, sep="\t", low_memory=False)
     return df
 
-
+# clean data
 def clean_data(df):
 
     needed_cols = [
@@ -26,7 +26,7 @@ def clean_data(df):
     ]
 
     df = df[needed_cols].copy()
-
+    
     df = df.dropna(subset=[
         "product_name",
         "proteins_100g",
@@ -47,7 +47,7 @@ def clean_data(df):
 
     for col in numeric_cols:
         df[col] = pd.to_numeric(df[col], errors="coerce")
-
+    # remove missing values
     df = df.dropna()
 
     df = df.head(200)
@@ -77,6 +77,7 @@ def create_price_and_score(df):
 
     return df
 
+# Apply dynamic programming
 
 def knapsack(items, budget):
 
