@@ -20,7 +20,7 @@ budget = st.number_input(
     value=30
 )
 
-
+# CLean data and Remove missing values
 def clean_data(df):
 
     needed_cols = [
@@ -64,7 +64,7 @@ def clean_data(df):
 
     return df
 
-
+# Calculate nutrition score
 def create_price_and_score(df):
 
     np.random.seed(42)
@@ -95,7 +95,7 @@ def create_price_and_score(df):
 
     return df
 
-
+# Apply dynamic programming
 def knapsack(items, budget):
 
     n = len(items)
