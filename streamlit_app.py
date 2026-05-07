@@ -5,7 +5,7 @@ import numpy as np
 st.title("Grocery Shopping Optimization")
 st.write("This app uses 0/1 Knapsack Dynamic Programming to select grocery items within a budget.")
 
-uploaded_file = st.file_uploader("Upload Open Food Facts TSV file", type=["tsv"])
+uploaded_file = st.file_uploader("Upload Open Food Facts TSV file", type=["csv"])
 
 budget = st.number_input("Enter grocery budget", min_value=1, value=30)
 
@@ -112,7 +112,7 @@ def knapsack(items, budget):
 
 
 if uploaded_file is not None:
-    df = pd.read_csv(uploaded_file, sep="\t", low_memory=False)
+    df = pd.read_csv(uploaded_file)
 
     df = clean_data(df)
     df = create_price_and_score(df)
