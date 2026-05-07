@@ -109,3 +109,76 @@ grocery-knapsack-project/
 ├── requirements.txt
 ├── README.md
 └── proposal.pdf
+
+## 2. Run Main Python Program
+
+```bash
+py src/main.py
+```
+
+The program:
+
+- loads the dataset
+- preprocesses the data
+- calculates nutrition scores
+- applies the knapsack algorithm
+- generates optimized grocery selections
+
+---
+
+## 3. Run Streamlit App
+
+```bash
+streamlit run streamlit_app.py
+```
+
+---
+
+# Streamlit Hosted App
+
+Hosted Application:
+
+https://grocery-knapsack-project-x2g9sc7htbngsam8fhqqhd.streamlit.app/
+
+---
+
+# Example Workflow
+
+1. Upload grocery dataset CSV file
+2. Enter grocery budget
+3. Click **“Optimize Grocery Basket”**
+4. View:
+   - selected grocery items
+   - nutrition score graph
+   - total cost
+   - remaining budget
+5. Download optimized grocery CSV results
+
+---
+
+# Results
+
+The algorithm successfully generates optimized grocery baskets based on user-defined budgets.
+
+### Example
+
+- Budget: $30
+- Total Cost: $30
+- Nutrition Score: 1219
+
+The project demonstrates how Dynamic Programming can solve practical real-world optimization problems.
+
+---
+
+# AI Usage Statement
+
+AI tools were used only for UI guidance, debugging assistance, deployment support, and general project guidance.
+
+The project idea, dynamic programming approach, algorithm implementation, core logic, comments, and documentation were manually developed and authored by the project team in accordance with assignment requirements.
+
+---
+
+# Team Members
+
+- Simran Kharbanda
+- Shashank Ashoka
