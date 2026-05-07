@@ -108,5 +108,4 @@ grocery-knapsack-project/
 ├── streamlit_app.py
 ├── requirements.txt
 ├── README.md
-├── proposal.pdf
-└── presentation.pdf
+└── proposal.pdf
