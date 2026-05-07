@@ -124,6 +124,7 @@ def main():
     print("Cleaning dataset...")
 
     df = clean_data(df)
+    df.to_csv("outputs/sample_data.csv", index=False)
 
     print("Creating scores...")
 
