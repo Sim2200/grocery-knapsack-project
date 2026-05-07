@@ -182,5 +182,6 @@ The project demonstrates how Dynamic Programming can solve practical real-world 
 
 # Team Members
 
-- Simran Kharbanda
-- Shashank Ashoka
+- Simran Kharbanda (UID: 122283671)
+- Shashank Ashoka (UID: 122241329)
+
